@@ -1,0 +1,55 @@
+﻿@model testNavigation.Models.ViewModel.UserVM;
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.oUser.Id == 0)
+{
+    <h1>Create User</h1>
+}
+else
+{
+    <h1>Edit User</h1>
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        <form asp-action="NewUser" asp-controller="Home" method="post">
+            <input type="hidden" asp-for="oUser.Id" />
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oUser.Name">Nombre</label>
+                <input class="form-control form-control-sm" asp-for="oUser.Name" type="text" />
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label" asp-for="oUser.LastName">Apellido</label>
+                <input class="form-control form-control-sm" asp-for="oUser.LastName" type="text" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="oUser.IdActive">Status</label>
+                <select class="form-select form-select-sm" asp-for="oUser.IdActive" asp-items="@Model.oListaActivo">
+                    <option selected desable>Select</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                @if (Model.oUser.Id == 0)
+                {
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Create</button>
+                }
+                else
+                {
+                    <button class="btn btn-primary btn-sm w-25" type="submit">Update</button>
+                }
+
+                <a class="btn btn-warning btn-sm" asp-action="List" asp-controller="Home">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
